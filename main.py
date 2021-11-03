@@ -1,17 +1,26 @@
 import pygame
 import sys
 from pygame import math
+import os
 
 
 class Game:
-    def __init__(self, WINDOW_SIZE, title, icon):
+    def __init__(self, WINDOW_SIZE, title, icon_path):
+        os.environ['SDL_VIDEO_CENTERED'] = '1'
+        pygame.init()
+
         self.WINDOW_SIZE = WINDOW_SIZE
         self.display = pygame.display.set_mode(self.WINDOW_SIZE)
         pygame.display.set_caption(title)
+
+        icon = pygame.image.load(icon_path)
         pygame.display.set_icon(icon)
 
+
     def render(self):
-        pass
+        self.display.fill((0, 0, 0))
+
+        pygame.display.update()
 
 
     def event_handler(self):
@@ -37,4 +46,5 @@ class Game:
 
 if __name__ == '__main__':
     game = Game((800, 800), "Game", r"assets/icon.png")
-    game.run()
+    while True:
+        game.run()
